@@ -250,7 +250,7 @@ LANG=uk_UA.UTF-8
 LC_ALL=uk_UA.UTF-8
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run unit tests
@@ -308,7 +308,7 @@ python -m pytest tests/test_integration.py
 - [ ] A/B testing framework
 - [ ] Advanced monitoring dashboard
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)

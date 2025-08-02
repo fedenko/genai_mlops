@@ -2,7 +2,7 @@
 
 A comprehensive MLOps pipeline for Ukrainian news classification and summarization, combining traditional ML and deep learning approaches with production-ready deployment on AWS.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project demonstrates advanced MLOps practices through a hybrid NLP pipeline that:
 - **Classifies** Ukrainian news articles into 5 categories (політика, спорт, новини, бізнес, технології)
@@ -10,14 +10,14 @@ This project demonstrates advanced MLOps practices through a hybrid NLP pipeline
 - **Tracks experiments** with MLflow for model comparison and versioning
 - **Deploys** to AWS Lambda for real-time inference
 
-## 📊 Dataset
+## Dataset
 
 - **Source**: [FIdo-AI/ua-news](https://huggingface.co/datasets/FIdo-AI/ua-news)
 - **Size**: 151,000 Ukrainian news articles (120k train, 30k test)
 - **Categories**: 5 balanced news categories
 - **Language**: Ukrainian (Cyrillic text)
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -38,7 +38,7 @@ This project demonstrates advanced MLOps practices through a hybrid NLP pipeline
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-## 🚀 Features
+## Features
 
 ### Core Functionality
 - **Multi-Model Classification**: BERT, SVM, Random Forest comparison
@@ -53,7 +53,7 @@ This project demonstrates advanced MLOps practices through a hybrid NLP pipeline
 - **AWS Deployment**: Serverless inference with Lambda + API Gateway
 - **Monitoring**: Performance tracking and error handling
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 mlops-ua-news/
@@ -86,7 +86,7 @@ mlops-ua-news/
 └── README.md                     # This file
 ```
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.9+
@@ -126,7 +126,7 @@ docker-compose up --build
 # - API Server: http://localhost:8080
 ```
 
-## 🎯 Usage
+## Usage
 
 ### 1. Data Analysis
 
@@ -199,7 +199,7 @@ curl -X POST https://your-api-url.amazonaws.com/prod/process \
   }'
 ```
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 ### Classification Performance
 - **BERT Multilingual**: ~87% accuracy
@@ -217,7 +217,7 @@ curl -X POST https://your-api-url.amazonaws.com/prod/process \
 - **Memory Usage**: ~2GB peak
 - **Cost**: ~$0.001 per 1000 requests
 
-## 🔧 Configuration
+## Configuration
 
 ### Training Configuration
 
@@ -266,7 +266,7 @@ python -m pytest tests/test_models.py
 python -m pytest tests/test_integration.py
 ```
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 ### MLflow Tracking
 - Model performance metrics
@@ -284,14 +284,14 @@ python -m pytest tests/test_integration.py
 - Summarization effectiveness
 - Ukrainian language coverage
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - **Data Privacy**: No personal data storage
 - **Model Security**: S3 bucket access controls
 - **API Security**: Rate limiting, input validation
 - **Infrastructure**: IAM roles with least privilege
 
-## 🚦 Deployment Pipeline
+## Deployment Pipeline
 
 1. **Development**: Local training and testing
 2. **Staging**: Docker-based validation
@@ -299,7 +299,7 @@ python -m pytest tests/test_integration.py
 4. **Monitoring**: MLflow + CloudWatch
 5. **Updates**: Automated model retraining
 
-## 🛣️ Roadmap
+## Roadmap
 
 - [ ] Multi-language support (Russian, English)
 - [ ] Real-time model retraining
@@ -316,18 +316,18 @@ python -m pytest tests/test_integration.py
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [FIdo-AI](https://github.com/fido-ai/ua-datasets) for the Ukrainian news dataset
 - [Hugging Face](https://huggingface.co/) for transformer models
 - [MLflow](https://mlflow.org/) for experiment tracking
 - Ukrainian NLP community for language resources
 
-## 📞 Support
+## Support
 
 For questions and support:
 - Open an issue on GitHub

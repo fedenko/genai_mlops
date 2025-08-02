@@ -299,22 +299,6 @@ python -m pytest tests/test_integration.py
 4. **Monitoring**: MLflow + CloudWatch
 5. **Updates**: Automated model retraining
 
-## Roadmap
-
-- [ ] Multi-language support (Russian, English)
-- [ ] Real-time model retraining
-- [ ] Advanced summarization evaluation (ROUGE, BLEU)
-- [ ] Kubernetes deployment option
-- [ ] A/B testing framework
-- [ ] Advanced monitoring dashboard
-
-## Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
 
 ## License
 

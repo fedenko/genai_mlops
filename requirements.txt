@@ -1,0 +1,33 @@
+# Core ML and NLP libraries
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.10.0
+scikit-learn>=1.3.0
+nltk>=3.8
+spacy>=3.6.0
+
+# Ukrainian language processing
+ua-datasets>=0.0.1
+
+# MLflow for experiment tracking
+mlflow>=2.5.0
+boto3>=1.28.0
+
+# Data processing and visualization
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Model evaluation
+rouge-score>=0.1.2
+evaluate>=0.4.0
+
+# Deployment
+flask>=2.3.0
+gunicorn>=21.0.0
+
+# Development and testing
+jupyter>=1.0.0
+pytest>=7.4.0
+black>=23.0.0

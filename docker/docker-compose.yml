@@ -1,0 +1,135 @@
+# Docker Compose configuration for Ukrainian News NLP Pipeline
+version: '3.8'
+
+services:
+  # Main application service
+  ukrainian-nlp:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ukrainian-nlp-pipeline
+    environment:
+      - PYTHONPATH=/app/src:/app
+      - LANG=uk_UA.UTF-8
+      - LC_ALL=uk_UA.UTF-8
+    volumes:
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../logs:/app/logs
+      - ../mlflow:/app/mlflow
+      - ../notebooks:/app/notebooks
+    working_dir: /app
+    command: python src/training/train_pipeline.py
+    depends_on:
+      - mlflow-db
+    networks:
+      - ukrainian-nlp-network
+
+  # MLflow tracking server
+  mlflow-server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: mlflow-server
+    environment:
+      - PYTHONPATH=/app/src:/app
+      - MLFLOW_BACKEND_STORE_URI=postgresql://mlflow:mlflow@mlflow-db:5432/mlflow
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/app/mlflow/artifacts
+    volumes:
+      - ../mlflow:/app/mlflow
+      - ../models:/app/models
+    ports:
+      - "5000:5000"
+    command: >
+      bash -c "
+        python -c 'import time; time.sleep(10)' &&
+        mlflow server 
+        --backend-store-uri postgresql://mlflow:mlflow@mlflow-db:5432/mlflow
+        --default-artifact-root /app/mlflow/artifacts
+        --host 0.0.0.0
+        --port 5000
+      "
+    depends_on:
+      - mlflow-db
+    networks:
+      - ukrainian-nlp-network
+
+  # PostgreSQL database for MLflow
+  mlflow-db:
+    image: postgres:13
+    container_name: mlflow-postgres
+    environment:
+      - POSTGRES_DB=mlflow
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=mlflow
+    volumes:
+      - mlflow_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ukrainian-nlp-network
+
+  # Jupyter notebook server
+  jupyter:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ukrainian-nlp-jupyter
+    environment:
+      - PYTHONPATH=/app/src:/app
+      - LANG=uk_UA.UTF-8
+      - LC_ALL=uk_UA.UTF-8
+    volumes:
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../notebooks:/app/notebooks
+      - ../src:/app/src
+    ports:
+      - "8888:8888"
+    command: >
+      bash -c "
+        pip install jupyter jupyterlab &&
+        jupyter lab 
+        --ip=0.0.0.0 
+        --port=8888 
+        --no-browser 
+        --allow-root 
+        --NotebookApp.token='' 
+        --NotebookApp.password=''
+      "
+    networks:
+      - ukrainian-nlp-network
+
+  # Model inference API service
+  inference-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ukrainian-nlp-api
+    environment:
+      - PYTHONPATH=/app/src:/app
+      - LANG=uk_UA.UTF-8
+      - LC_ALL=uk_UA.UTF-8
+    volumes:
+      - ../models:/app/models
+      - ../src:/app/src
+    ports:
+      - "8080:8080"
+    command: python src/deployment/api_server.py
+    depends_on:
+      - ukrainian-nlp
+    networks:
+      - ukrainian-nlp-network
+
+# Named volumes
+volumes:
+  mlflow_db_data:
+
+# Networks
+networks:
+  ukrainian-nlp-network:
+    driver: bridge
+
+# Additional compose files for different environments:
+# docker-compose.override.yml - for local development
+# docker-compose.prod.yml - for production deployment

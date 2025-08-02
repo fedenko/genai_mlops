@@ -311,13 +311,6 @@ This project is released into the public domain under The Unlicense - see the [L
 - [MLflow](https://mlflow.org/) for experiment tracking
 - Ukrainian NLP community for language resources
 
-## Support
-
-For questions and support:
-- Open an issue on GitHub
-- Check the [documentation](docs/)
-- Review [troubleshooting guide](docs/troubleshooting.md)
-
 ---
 
 **Built with ❤️ for the Ukrainian NLP community**

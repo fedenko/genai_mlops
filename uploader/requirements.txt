@@ -1,0 +1,3 @@
+datasets
+boto3
+pandas
